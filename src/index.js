@@ -34,15 +34,27 @@ const renderAllRamens = (ramensArr) => {
 }
 
 const renderOneMenu = (ramenObj) => {
-// takes an a ramen object    
+// takes in a ramen object    
     //console.log(ramenObj)
+
+// Delete button 
+    const div = document.createElement('div')
     const img = document.createElement('img')
-// creating the image tag 
-    img.addEventListener('click', () => renderDetail(ramenObj))
-// putting the event in renderOneMenu function so it renders at the same time, passing it a funciton built outside the scope with the same ramenObj argument    
+    const btn = document.createElement('button')
+    
     img.src = ramenObj.image
+    btn.textContent = 'X'
+    btn.style.backgroundColor = 'red'
+    btn.style.color = 'white'
+    div.append(img, btn)
+    
+    img.addEventListener('click', () => renderDetail(ramenObj))
+    btn.addEventListener('click', () => div.remove())
+// putting the event in renderOneMenu function so it renders at the same time, passing it a funciton built outside the scope with the same ramenObj argument    
+    
 // taking the src from the image key in the passed in ramen obj
-    menu.appendChild(img)
+    
+    menu.appendChild(div)
 // adding the tag to the #ramen-menu div with menu const created above    
 
 }
@@ -66,7 +78,7 @@ const renderDetail = (ramenObj) => {
 function handleAddRamen(e) {
     e.preventDefault()
     //prevent form default behavior
-    console.log(e.target.restaurant)
+    //console.log(e.target.restaurant)
     // the e.target is a reference to the object onto which the event was dispatched. then value accesses the value of that 
     const name = e.target.name.value
     const restaurant = e.target.restaurant.value
